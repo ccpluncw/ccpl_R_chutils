@@ -1,0 +1,170 @@
+#' New Subdrectory Function
+#'
+#' This function creates a new subdirectory and moves into it. If the subdirectory already exist, then it just moves into it.
+#' @param mainDir the directory under which the subdirectory will exist.
+#' @param subDir the new subdirectory.
+#' @keywords new directory
+#' @export
+#' @examples ch.newDir (currentDir, newDir)
+
+
+ch.newDir <- function (mainDir, subDir) {
+		if (file.exists(subDir)){
+	    setwd(file.path(mainDir, subDir))
+		} else {
+	    dir.create(file.path(mainDir, subDir))
+	    setwd(file.path(mainDir, subDir))
+		}
+}
+
+#' Permutation Function
+#'
+#' This function creates all the permutations of all the items from 1-n
+#' @param n the total number of items.
+#' @return a matrix of all the possible permutations of n items
+#' @keywords permutations
+#' @export
+#' @examples ch.permute (4)
+
+ch.permute <- function(n){
+    if(n==1){
+        return(matrix(1))
+    } else {
+        sp <- ch.permute(n-1)
+        p <- nrow(sp)
+        A <- matrix(nrow=n*p,ncol=n)
+        for(i in 1:n){
+            A[(i-1)*p+1:p,] <- cbind(i,sp+(sp>=i))
+        }
+        return(A)
+    }
+}
+
+#' Graph function for Values Experiment
+#'
+#' This function creates a graph of p(hit) (0-1 on y-axis) as a function of an x variable (often overlap). It aldo fits a non-linear function to the data whereby the first point is 1 and the last point is .5. It outputs the fit of the function.
+#' @param x the x variable for the x-axis (often overlap).
+#' @param y the y variable for the y-axis (often p(hit)).
+#' @param plotTitle a string with the title of the plot.
+#' @param filename a string with the filename of the pdf of the file to be saved.  DEFAULT = NULL; no file saved.
+#' @param cex1 a numeric value for cex: the relative size of the text in the graph. cex1 > 1 is bigger; cex1 < 1 is smaller. DEFAULT=1.
+#' @param printR2 do you want the r square printed on the graph: TRUE/FALSE. DEFAULT=TRUE.
+#' @param yLabel a string with the title of y-axis. DEFAULT='p(hit)'
+#' @return a list of the fit, r2, and beta, from the nls .
+#' @keywords graph p(hit)
+#' @export
+#' @examples ch.plot.pHit (x,y)
+
+ch.plot.pHit <- function (x,y, plotTitle, filename=NULL, cex1 = 1, printR2 = T,yLabel="p(hit)", ...) {
+	#	par(mfrow=c(1,1), bg="white",  bty="n", font=2, family='serif', mar=c(5,6,4,7), las=1, cex=2)
+		plot(x, y, main=plotTitle, xlab= expression(paste("", Psi,"(value) Distributional overlap", sep="")), ylab=NA, pch=16, ylim = c(0,1))
+		mtext(side=2,yLabel, line=3, cex = cex1)
+
+			nlsFit = NULL
+			nlsFit.r2 = NULL
+			tryCatch ({
+				nlsFit <- nls(y~.5*(1-(x^b))+.5,  start=list(b=1))
+				}, error = function(e) {
+					print(paste("nls function did not fit", plotTitle))
+			})
+
+			if (!is.null(nlsFit)) {
+				abline(a=0.5,b=0,col="grey", lwd=2)
+				lines(x, predict(nlsFit), col="black", lwd=3)
+				if (printR2) {
+					nlsFit.r2<-1-( var(resid(nlsFit))/( var(resid(nlsFit))+var(fitted(nlsFit))))
+					mtext(side=4, expression(paste(r^{2}, "=", sep="")),line=-3,at=c(0), cex = cex1)
+					mtext(side=4,round(summary(nlsFit.r2),d=2), line=-2, at=c(0), cex = cex1)
+				}
+				nls.beta <- coef(nlsFit)
+			} else {
+				nlsFit.r2 <- NA
+				nls.beta <- NA
+			}
+
+			if (!is.null(filename)) {
+				dev.copy(pdf, filename, width=12, height=9)
+				dev.off();
+			}
+
+			return (list(nlsObject = nlsFit, beta = nls.beta, r2 = nlsFit.r2))
+}
+
+#' Graph function for Values Experiment
+#'
+#' This function creates a scatterplot (often a function of RT) as a function of an x variable (often overlap). It aldo fits a linear regression to the data. It outputs the fit of the function.
+#' @param x the x variable for the x-axis (often overlap).
+#' @param y the y variable for the y-axis (often p(hit)).
+#' @param plotTitle a string with the title of the plot.
+#' @param filename a string with the filename of the pdf of the file to be saved.  DEFAULT = NULL; no file saved.
+#' @param cex1 a numeric value for cex: the relative size of the text in the graph. cex1 > 1 is bigger; cex1 < 1 is smaller. DEFAULT=1.
+#' @param printR2 do you want the r square printed on the graph: TRUE/FALSE. DEFAULT=TRUE.
+#' @param yLabel a string with the title of y-axis. DEFAULT=NA.
+#' @param ylimMin a number denoting the minimum of the y-axis. DEFAULT=0.
+#' @param ylimMax a number denoting the maximum of the y-axis. DEFAULT=0. If ylimMin == ylimMax, the function determines a pretty y-axis for you.
+#' @return the fit the lm .
+#' @keywords graph overlap
+#' @export
+#' @examples ch.plot.lm (x,y)
+
+ch.plot.lm <- function (x,y, plotTitle, filename = NULL, cex1 = 1, printR2 = T, yLabel = NA, ylimMin = 0, ylimMax = 0, ...) {
+	#	par(mfrow=c(1,1), bg="white",  bty="n", font=2, family='serif', mar=c(5,6,4,7), las=1, cex=2)
+	if (ylimMin == ylimMax) {
+		buffer <- (max(y) - min(y)) * .1
+		ylimMin <-  min(y) - buffer
+		ylimMax <-  max(y) + buffer
+	}
+		plot(x, y, main=plotTitle, xlab= expression(paste("", Psi,"(value) Distributional overlap", sep="")), ylab=NA, pch=16, ylim=c(ylimMin,ylimMax))
+			lmFit <- lm(y ~ x)
+			abline(lmFit, col="black", lwd=3)
+			if (printR2) {
+				mtext(side=4, expression(paste(r^{2}, "=", sep="")),line=-3,at=c(ylimMin), cex = cex1)
+				mtext(side=4, round(summary(lmFit)$r.squared, d=2), line=-2,at=c(ylimMin), cex = cex1)
+			}
+			mtext(side=2,yLabel, line=3, cex = cex1)
+
+			if (!is.null(filename)) {
+				dev.copy(pdf, filename, width=12, height=9)
+				dev.off();
+			}
+
+			return(lmFit)
+}
+
+#' Capitalize first letter Function
+#'
+#' This function capitalizes the first letter of each word in a string of words.
+#' @param s a string of words.
+#' @param strict a switch, if true, it ensures that only the first letter of each word is capitalized. Otherwise all remaining letters keep their default capitalization.  DEFAULT=FALSE.
+#' @return a string of words with the first letter capitalized
+#' @keywords Capitalize
+#' @export
+#' @examples ch.capwords ("hello world")
+
+ch.capwords <- function(s, strict = FALSE) {
+	 cap <- function(s) paste(toupper(substring(s, 1, 1)),
+								{s <- substring(s, 2); if(strict) tolower(s) else s},
+													 sep = "", collapse = " " )
+			sapply(strsplit(s, split = " "), cap, USE.NAMES = !is.null(names(s)))
+}
+
+#' Merge all the files in a directory
+#'
+#' This function merges all the files in a directory.
+#' @param directoryName this is a string that specifies the name of the directory containing the datafiles.
+#' @param outputFile this is a string that specifies the name of the merged output file.
+#' @param extension this is a string that specifies extensions of the files to be merged. DEFAULT = ".dat"
+#' @param sep this is a string that specifies the how the columns in the files are separated. DEFAULT = "\t"
+#' @param header this is a boolean that specifies whether column headers are present. DEFAULT = T
+#' @return nothing (a file is written)
+#' @keywords merge data directory
+#' @export
+#' @examples ch.mergeDataInDir ("data", "out.txt")
+
+ch.mergeDataInDir <- function (directoryName, outputFile, extension = ".dat", sep = "\t", header = T, ...) {
+
+	raw.data = list.files(directoryName, full.names=TRUE, pattern=extension, all.files=T)
+	merge.all <- do.call(rbind, lapply(raw.data, read.table, sep=sep, header=header, fill=TRUE))
+	write.table(merge.all, file=outputFile, quote=F, sep=sep, row.names=F)
+
+}
