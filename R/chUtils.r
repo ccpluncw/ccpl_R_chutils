@@ -55,7 +55,7 @@ ch.permute <- function(n){
 #' @export
 #' @examples ch.plot.pHit (x,y)
 
-ch.plot.pHit <- function (x,y, plotTitle, filename=NULL, cex1 = 1, printR2 = T,yLabel="p(hit)", ...) {
+ch.plot.pHit <- function (x,y, plotTitle = NA, filename=NULL, cex1 = 1, printR2 = T,yLabel="p(hit)", ...) {
 	#	par(mfrow=c(1,1), bg="white",  bty="n", font=2, family='serif', mar=c(5,6,4,7), las=1, cex=2)
 		plot(x, y, main=plotTitle, xlab= expression(paste("", Psi,"(value) Distributional overlap", sep="")), ylab=NA, pch=16, ylim = c(0,1))
 		mtext(side=2,yLabel, line=3, cex = cex1)
@@ -71,10 +71,12 @@ ch.plot.pHit <- function (x,y, plotTitle, filename=NULL, cex1 = 1, printR2 = T,y
 			if (!is.null(nlsFit)) {
 				abline(a=0.5,b=0,col="grey", lwd=2)
 				lines(x, predict(nlsFit), col="black", lwd=3)
+				nlsFit.r2<-1-( var(resid(nlsFit))/( var(resid(nlsFit))+var(fitted(nlsFit))))
 				if (printR2) {
-					nlsFit.r2<-1-( var(resid(nlsFit))/( var(resid(nlsFit))+var(fitted(nlsFit))))
-					mtext(side=4, expression(paste(r^{2}, "=", sep="")),line=-3,at=c(0), cex = cex1)
-					mtext(side=4,round(summary(nlsFit.r2),d=2), line=-2, at=c(0), cex = cex1)
+					r2 <- round(nlsFit.r2, d=2)
+					# mtext(side=4, expression(paste(r^{2}, "=", sep="")),line=-3,at=c(0), cex = cex1)
+					# mtext(side=4,round(summary(nlsFit.r2),d=2), line=-2, at=c(0), cex = cex1)
+					mtext(side=2, bquote(r^2==.(r2)), line=0, at = -.2, cex = .8*cex1)
 				}
 				nls.beta <- coef(nlsFit)
 			} else {
@@ -107,19 +109,19 @@ ch.plot.pHit <- function (x,y, plotTitle, filename=NULL, cex1 = 1, printR2 = T,y
 #' @export
 #' @examples ch.plot.lm (x,y)
 
-ch.plot.lm <- function (x,y, plotTitle, filename = NULL, cex1 = 1, printR2 = T, yLabel = NA, ylimMin = 0, ylimMax = 0, ...) {
+ch.plot.lm <- function (x,y, plotTitle = NA, filename = NULL, cex1 = 1, printR2 = T, yLabel = NA, ylimMin = 0, ylimMax = 0, xlab= expression(paste("", Psi,"(value) Distributional overlap", sep="")), ...) {
 	#	par(mfrow=c(1,1), bg="white",  bty="n", font=2, family='serif', mar=c(5,6,4,7), las=1, cex=2)
 	if (ylimMin == ylimMax) {
 		buffer <- (max(y) - min(y)) * .1
 		ylimMin <-  min(y) - buffer
 		ylimMax <-  max(y) + buffer
 	}
-		plot(x, y, main=plotTitle, xlab= expression(paste("", Psi,"(value) Distributional overlap", sep="")), ylab=NA, pch=16, ylim=c(ylimMin,ylimMax))
+		plot(x, y, main=plotTitle, xlab= xlab, ylab=NA, pch=16, ylim=c(ylimMin,ylimMax))
 			lmFit <- lm(y ~ x)
 			abline(lmFit, col="black", lwd=3)
 			if (printR2) {
-				mtext(side=4, expression(paste(r^{2}, "=", sep="")),line=-3,at=c(ylimMin), cex = cex1)
-				mtext(side=4, round(summary(lmFit)$r.squared, d=2), line=-2,at=c(ylimMin), cex = cex1)
+				r2 <- round(summary(lmFit)$r.squared, d=2)
+				mtext(side=2, bquote(r^2==.(r2)), line=0,at=ylimMin - 2 * buffer, cex = .8*cex1)
 			}
 			mtext(side=2,yLabel, line=3, cex = cex1)
 
@@ -154,7 +156,7 @@ ch.capwords <- function(s, strict = FALSE) {
 #' @param directoryName this is a string that specifies the name of the directory containing the datafiles.
 #' @param outputFile this is a string that specifies the name of the merged output file.
 #' @param extension this is a string that specifies extensions of the files to be merged. DEFAULT = ".dat"
-#' @param sep this is a string that specifies the how the columns in the files are separated. DEFAULT = "\t"
+#' @param sep this is a string that specifies the how the columns in the files are separated. DEFAULT = tab
 #' @param header this is a boolean that specifies whether column headers are present. DEFAULT = T
 #' @return nothing (a file is written)
 #' @keywords merge data directory

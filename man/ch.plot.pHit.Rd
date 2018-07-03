@@ -4,8 +4,8 @@
 \alias{ch.plot.pHit}
 \title{Graph function for Values Experiment}
 \usage{
-ch.plot.pHit(x, y, plotTitle, filename = NULL, cex1 = 1, printR2 = T,
-  yLabel = "p(hit)", ...)
+ch.plot.pHit(x, y, plotTitle = NA, filename = NULL, cex1 = 1,
+  printR2 = T, yLabel = "p(hit)", ...)
 }
 \arguments{
 \item{x}{the x variable for the x-axis (often overlap).}

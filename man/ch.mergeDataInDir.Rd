@@ -14,7 +14,7 @@ ch.mergeDataInDir(directoryName, outputFile, extension = ".dat",
 
 \item{extension}{this is a string that specifies extensions of the files to be merged. DEFAULT = ".dat"}
 
-\item{sep}{this is a string that specifies the how the columns in the files are separated. DEFAULT = "\t"}
+\item{sep}{this is a string that specifies the how the columns in the files are separated. DEFAULT = tab}
 
 \item{header}{this is a boolean that specifies whether column headers are present. DEFAULT = T}
 }
