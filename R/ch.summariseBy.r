@@ -9,6 +9,7 @@
 #' @keywords ddply summarize group
 #' @return a dataframe
 #' @export
+#' @importFrom dplyr %>%
 #' @examples ch.summariseBy (df, "sn", "RT", mean)
 
 ch.summariseBy <- function(data, grpCol, dvCol, newCol, FUN) {
