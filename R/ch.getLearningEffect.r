@@ -22,18 +22,18 @@ ch.getLearningEffect <- function (data, x, y, a = 2000, b = -1, c = 100, ...) {
 
   out.nls = NULL
   tryCatch (
-    out.nls<-nls(y~a*exp(b*(x-1))+c, data=dfIn, start=list(a=a, b=b, c=c), nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE)),error = function (w) return (NULL)
+    out.nls<-nls(y~a*exp(b*(x-1))+c, data=dfIn, start=list(a=a, b=b, c=c),control =  nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE)),error = function (w) return (NULL)
   )
 
   if (is.null(out.nls)) {
   tryCatch (
-      out.nls<-nls(y~a*exp(b*(x-1)), data=dfIn, start=list(a=a, b=b), nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE)),
+      out.nls<-nls(y~a*exp(b*(x-1)), data=dfIn, start=list(a=a, b=b), control = nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE)),
       error = function (w) return (NULL)
     )
   }
   if (is.null(out.nls)) {
     tryCatch (
-          out.nls<-nls(y~a + b*(x-1), data=tmp, start=list(a=2000, b=-1), nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE)),
+          out.nls<-nls(y~a + b*(x-1), data=dfIn, start=list(a=2000, b=-1), control = nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE)),
           error = function (w) return (NULL)
         )
   }

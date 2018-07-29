@@ -29,9 +29,14 @@ ch.filterDataBetween <- function(data, dataCol, lowThresh = NULL, highThresh = N
       datKept <- data[(data[[dataCol]] < highThresh & data[[dataCol]] > lowThresh),]
     }
   }
-  numRemoved <- length(datRemoved[[dataCol]])
-  pRemoved <- numRemoved/length(data[[dataCol]])
 
+  if(length(datRemoved[[dataCol]]) == 0) {
+    numRemoved <- 0
+    pRemoved <- 0
+  } else {
+    numRemoved <- length(datRemoved[[dataCol]])
+    pRemoved <- numRemoved/length(data[[dataCol]])
+  }
   outList <- list(datKept = datKept, datRemoved = datRemoved, numRemoved = numRemoved, pRemoved = pRemoved)
 
   return(outList)

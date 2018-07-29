@@ -1,3 +1,15 @@
+#' New Rounding Function
+#'
+#' This function rounds numbers to a specified precision to in a particular direction.
+#' @param x a vector of numbers.
+#' @param accuracy the accuracy of the rounding.
+#' @param f the function for rounding: floor, ceiling, round.
+#' @keywords round numbers any
+#' @export
+#' @examples ch.round_any (x, .1, ceiling)
+
+ch.round_any <-  function(x, accuracy, f=round){f(x/ accuracy) * accuracy}
+
 #' New Subdrectory Function
 #'
 #' This function creates a new subdirectory and moves into it. If the subdirectory already exist, then it just moves into it.
@@ -57,15 +69,15 @@ ch.permute <- function(n){
 
 ch.plot.pHit <- function (x,y, plotTitle = NA, filename=NULL, cex1 = 1, printR2 = T,yLabel="p(hit)", ...) {
 	#	par(mfrow=c(1,1), bg="white",  bty="n", font=2, family='serif', mar=c(5,6,4,7), las=1, cex=2)
-		plot(x, y, main=plotTitle, xlab= expression(paste("", Psi,"(value) Distributional overlap", sep="")), ylab=NA, pch=16, ylim = c(0,1))
+		plot(x, y, main=plotTitle, xlab= expression(paste("", Psi,"(value) Distributional overlap", sep="")), ylab=NA, pch=16, ylim = c(0,1), ...)
 		mtext(side=2,yLabel, line=3, cex = cex1)
 
 			nlsFit = NULL
 			nlsFit.r2 = NULL
 			tryCatch ({
-				nlsFit <- nls(y~.5*(1-(x^b))+.5,  start=list(b=1))
+				nlsFit <- nls(y~.5*(1-(x^b))+.5,  start=list(b=1), control = nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE))
 				}, error = function(e) {
-					print(paste("nls function did not fit", plotTitle))
+					print(paste("nls function did not fit", plotTitle, e))
 			})
 
 			if (!is.null(nlsFit)) {
@@ -85,7 +97,7 @@ ch.plot.pHit <- function (x,y, plotTitle = NA, filename=NULL, cex1 = 1, printR2 
 			}
 
 			if (!is.null(filename)) {
-				dev.copy(pdf, filename, width=12, height=9)
+				dev.copy(pdf, filename, width=8, height=8)
 				dev.off();
 			}
 
@@ -116,7 +128,7 @@ ch.plot.lm <- function (x,y, plotTitle = NA, filename = NULL, cex1 = 1, printR2 
 		ylimMin <-  min(y) - buffer
 		ylimMax <-  max(y) + buffer
 	}
-		plot(x, y, main=plotTitle, xlab= xlab, ylab=NA, pch=16, ylim=c(ylimMin,ylimMax))
+		plot(x, y, main=plotTitle, xlab= xlab, ylab=NA, pch=16, ylim=c(ylimMin,ylimMax), ...)
 			lmFit <- lm(y ~ x)
 			abline(lmFit, col="black", lwd=3)
 			if (printR2) {
@@ -126,7 +138,7 @@ ch.plot.lm <- function (x,y, plotTitle = NA, filename = NULL, cex1 = 1, printR2 
 			mtext(side=2,yLabel, line=3, cex = cex1)
 
 			if (!is.null(filename)) {
-				dev.copy(pdf, filename, width=12, height=9)
+				dev.copy(pdf, filename, width=8, height=8)
 				dev.off();
 			}
 

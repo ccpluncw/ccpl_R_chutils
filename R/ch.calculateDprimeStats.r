@@ -15,7 +15,6 @@
 
 
 ch.calculateDprimeStats <- function (data, grpCols, correctCol, correctVals = c(TRUE, FALSE), targetPresentCol, targetPresentVals = c(TRUE, FALSE), addCorrection = TRUE) {
-  library(chutils)
 
     if (addCorrection) {
       correction <- 0.5
@@ -23,7 +22,7 @@ ch.calculateDprimeStats <- function (data, grpCols, correctCol, correctVals = c(
       correction <- 0.0
     }
 
-    df.Dprime <- as.data.frame(data %>% group_by_(grpCols) %>% summarise (
+    df.Dprime <- as.data.frame(data %>% dplyr::group_by_(grpCols) %>% dplyr::summarise(
       N.Hit = sum(eval(parse(text=correctCol))==correctVals[1] & eval(parse(text=targetPresentCol))==targetPresentVals[1])+correction,
       N.Miss = sum(eval(parse(text=correctCol))==correctVals[2] & eval(parse(text=targetPresentCol))==targetPresentVals[1])+correction,
       N.CR = sum(eval(parse(text=correctCol))==correctVals[1] & eval(parse(text=targetPresentCol))==targetPresentVals[2])+correction,

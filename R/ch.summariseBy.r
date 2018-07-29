@@ -12,8 +12,8 @@
 #' @examples ch.summariseBy (df, "sn", "RT", mean)
 
 ch.summariseBy <- function(data, grpCol, dvCol, newCol, FUN) {
-  library(dplyr)
-  res <- as.data.frame(data %>% group_by_(grpCol) %>% summarise ( out = FUN(eval(parse(text=dvCol)))))
+
+  res <- as.data.frame(data %>% dplyr::group_by_(grpCol) %>% dplyr::summarise( out = FUN(eval(parse(text=dvCol)))))
   colnames(res)[which(names(res) == "out")] <- newCol
   return(res)
 }

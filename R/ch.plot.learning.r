@@ -25,7 +25,7 @@ ch.plot.learning <- function (x, y, fit = NULL, plotTitle = NA, filename = NULL,
       ylimMax <-  max(y) + buffer
     }
 
-    plot(x, y, main=plotTitle, xlab=xLabel, ylab=NA, pch=16, ylim=c(ylimMin,ylimMax), bty="n", col="grey75")
+    plot(x, y, main=plotTitle, xlab=xLabel, ylab=NA, pch=16, ylim=c(ylimMin,ylimMax), bty="n", col="grey75", ...)
       axis(side=1, lwd=2)
       axis(side=2, lwd=2)
 
@@ -42,7 +42,7 @@ ch.plot.learning <- function (x, y, fit = NULL, plotTitle = NA, filename = NULL,
     mtext(side=2,yLabel, line=3, cex=cex1)
 
     if (!is.null(filename)) {
-      dev.copy(pdf, filename, width=12, height=9)
+      dev.copy(pdf, filename, width=8, height=8)
       dev.off();
     }
 
