@@ -57,7 +57,6 @@ ch.filterDataBetween <- function(data, dataCol, lowThresh = NULL, highThresh = N
 #' @examples ch.filterGrpBtwn (data=myDataFrame, "RT", "sn", 200, 5000, mean)
 
 ch.filterGrpBtwn <- function(data, dataCol, grpCol, lowThresh=NULL, highThresh=NULL, FUN) {
-  library(chutils)
 
   if(length(grpCol)!=1) {
     stop("grpCol required to be of length 1")

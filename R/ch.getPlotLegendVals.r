@@ -1,7 +1,7 @@
 #' A function to create unique color and line type values for up to two groups to be plotted
 #'
 #' This function creates unique color and line type values for groups to be plotted.
-#' @param df.grpIndex a dataframe containing a column for each grouping variable with the values containing the combination of those variables that are to be plotted. The last column should be the index number for the model that will be used for plotting.  This dataframe is output by the XXX function.
+#' @param df.grpIndex a dataframe containing a column for each grouping variable with the values containing the combination of those variables that are to be plotted. The last column should be the index number for the model that will be used for plotting.  This dataframe is output by the ch.subsetDFbyGroups() function.
 #' @param groupsToPlot a vector of up to two strings containing the column names in df.grpIndex that the legend will be created for.
 #' @keywords plot group grouping variables legend lty colors
 #' @return .
