@@ -4,9 +4,10 @@
 \alias{ch.plotTwoLinearFits}
 \title{A function to fit and plot two linear function one over the other.}
 \usage{
-ch.plotTwoLinearFits(data, xCol, y1Col, y2Col, y1Label = NA, y2Label = NA,
-  parOp = NULL, cex1 = 1.25, cex.topTile = 1.25, printR2 = T,
-  topTitle = NULL, filename = NULL, ...)
+ch.plotTwoLinearFits(data, xCol, y1Col, y2Col, minN = NULL, y1Label = NA,
+  y2Label = NA, parOp = NULL, cex1 = 1.25, cex.topTile = 1.25,
+  printR2 = T, topTitle = NULL, ylimMin1 = 0, ylimMax1 = 0,
+  ylimMin2 = 0, ylimMax2 = 0, filename = NULL, ...)
 }
 \arguments{
 \item{data}{a dataframe.}
@@ -16,6 +17,8 @@ ch.plotTwoLinearFits(data, xCol, y1Col, y2Col, y1Label = NA, y2Label = NA,
 \item{y1Col}{a string that specifies the name of the column in "data" that contains the the first DV to be fit.}
 
 \item{y2Col}{a string that specifies the name of the column in "data" that contains the the second DV to be fit.}
+
+\item{minN}{an integer indicating the minimum number of trials in each condition that is valid for analysis.  Below that number, the condition will be removed. DEFAULT = NULL.}
 
 \item{y1Label}{a string that specifies the y-axis label name for the y1Fit. DEFAULT = NA.}
 
@@ -30,6 +33,14 @@ ch.plotTwoLinearFits(data, xCol, y1Col, y2Col, y1Label = NA, y2Label = NA,
 \item{printR2}{a boolean that determines whether to print the r square on the graph. DEFAULT = FALSE.}
 
 \item{topTitle}{a string that will be the title at the top of the page. DEFAULT = NULL.}
+
+\item{ylimMin1}{a number denoting the minimum of the y-axis for graph 1. DEFAULT=0.}
+
+\item{ylimMax1}{a number denoting the maximum of the y-axis for graph 1. DEFAULT=0. If ylimMin1 == ylimMax1, the function determines a}
+
+\item{ylimMin2}{a number denoting the minimum of the y-axis for graph 2. DEFAULT=0.}
+
+\item{ylimMax2}{a number denoting the maximum of the y-axis for graph 2. DEFAULT=0. If ylimMin2 == ylimMax2, the function determines a}
 
 \item{filename}{the filename (pdf) to save the output of the graph. DEFAULT = NULL (no graph saved)}
 }

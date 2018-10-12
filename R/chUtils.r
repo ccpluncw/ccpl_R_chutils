@@ -123,8 +123,9 @@ ch.plot.pHit <- function (x,y, plotTitle = NA, filename=NULL, cex1 = 1, printR2 
 
 ch.plot.lm <- function (x,y, plotTitle = NA, filename = NULL, cex1 = 1, printR2 = T, yLabel = NA, ylimMin = 0, ylimMax = 0, xlab= expression(paste("", Psi,"(value) Distributional overlap", sep="")), ...) {
 	#	par(mfrow=c(1,1), bg="white",  bty="n", font=2, family='serif', mar=c(5,6,4,7), las=1, cex=2)
+
+	buffer <- (max(y) - min(y)) * .1
 	if (ylimMin == ylimMax) {
-		buffer <- (max(y) - min(y)) * .1
 		ylimMin <-  min(y) - buffer
 		ylimMax <-  max(y) + buffer
 	}
