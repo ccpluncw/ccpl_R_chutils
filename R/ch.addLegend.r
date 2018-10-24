@@ -18,7 +18,11 @@ ch.addLegend <- function (df.legend, grpCols, placement="topright", horiz = T, l
 
     op <- par(xpd = T)
 
-    df.legend$nm <- apply( df.legend[ , grpCols ] , 1 , paste , collapse = "-" )
+    if(length(grpCols) > 1) {
+      df.legend$nm <- apply( df.legend[ , grpCols ] , 1 , paste , collapse = "-" )
+    } else {
+      df.legend$nm <- df.legend[[grpCols]]
+    }
     lgndTitle <- NULL
     if(includeTitle) {
       lgndTitle <- paste(grpCols, collapse="-")

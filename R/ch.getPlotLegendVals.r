@@ -56,8 +56,13 @@ ch.getPlotLegendVals <- function (df.grpIndex) {
 
     #merge with df.grpInfo and output
     tmpDF <- merge(df.levelLgnd[[as.character(df.grpInfo$grpName[1])]], df.grpIndex, by=as.character(df.grpInfo$grpName[1]))
-    outDF <- merge(df.levelLgnd[[as.character(df.grpInfo$grpName[2])]], tmpDF, by=as.character(df.grpInfo$grpName[2]))
 
+    if(nGrps == 2) {
+      outDF <- merge(df.levelLgnd[[as.character(df.grpInfo$grpName[2])]], tmpDF, by=as.character(df.grpInfo$grpName[2]))
+    } else {
+      outDF <- tmpDF
+      outDF$lty <- "solid"
+    }
     return(outDF)
 
 }

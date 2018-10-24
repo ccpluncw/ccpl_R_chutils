@@ -4,8 +4,8 @@
 \alias{ch.filterGrpBtwn}
 \title{A function to filter data between two thresholds grouped by a single column}
 \usage{
-ch.filterGrpBtwn(data, dataCol, grpCol, lowThresh = NULL, highThresh = NULL,
-  FUN)
+ch.filterGrpBtwn(data, dataCol, grpCol, lowThresh = NULL,
+  highThresh = NULL, FUN)
 }
 \arguments{
 \item{data}{a dataframe containing the data.}

@@ -36,7 +36,8 @@ ch.calculateDprimeStats <- function (data, grpCols, correctCol, correctVals = c(
     df.Dprime$pFA <- df.Dprime$N.FA/df.Dprime$N.targetAbsent
     df.Dprime$pCR <- df.Dprime$N.CR/df.Dprime$N.targetAbsent
     df.Dprime$dPrime <- qnorm(df.Dprime$pHit)-qnorm(df.Dprime$pFA)
-    df.Dprime$beta <- .5*(qnorm(df.Dprime$pHit)+qnorm(df.Dprime$pFA))
+    df.Dprime$beta <- -.5*(qnorm(df.Dprime$pHit)+qnorm(df.Dprime$pFA))
+    df.Dprime$RelBeta <- df.Dprime$beta/df.Dprime$dPrime
     df.Dprime$varDp <- mapply(ch.getDprimeVariance,df.Dprime$N.targetPresent, df.Dprime$N.targetAbsent, df.Dprime$pFA, df.Dprime$pHit)
 
     zOut <- mapply(ch.ZtestDprimeEqualZero,df.Dprime$N.targetPresent, df.Dprime$N.targetAbsent, df.Dprime$pFA, df.Dprime$pHit)

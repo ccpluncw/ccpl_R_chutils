@@ -4,7 +4,8 @@
 \alias{ch.getRowsByColItemsFiles}
 \title{A function to extract the rows in FileA that contain the elements in FileB.}
 \usage{
-ch.getRowsByColItemsFiles(datafile, itemColName, colItemFile, saveFile = NULL)
+ch.getRowsByColItemsFiles(datafile, itemColName, colItemFile,
+  saveFile = NULL)
 }
 \arguments{
 \item{datafile}{a string specifying the name of the file containing a dataframe (i.e., FileA).}

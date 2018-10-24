@@ -39,6 +39,9 @@ ch.subsetDFbyGroups <- function (data, grpCols) {
 
       #create index for outList
       tmpDF <- data.frame(grpSubsetConds[i,], indexNum = i)
+      if (length(grpCols) == 1) {
+        colnames(tmpDF)[1] <- col
+      }
       dfIndex <- ch.rbind(dfIndex, tmpDF)
       #subset the data based on the expression in condit
       outList[[i]] <- subset(data, eval(condit))
