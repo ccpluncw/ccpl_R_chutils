@@ -75,7 +75,7 @@ ch.plot.pHit <- function (x,y, plotTitle = NA, filename=NULL, cex1 = 1, printR2 
 			nlsFit = NULL
 			nlsFit.r2 = NULL
 			tryCatch ({
-				nlsFit <- nls(y~.5*(1-(x^b))+.5,  start=list(b=1), control = nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE))
+				nlsFit <- nls(y~.5*(1-(x^b))+.5,  start=list(b=1), control = nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE), algorithm = "port", upper = list(b=30))
 				}, error = function(e) {
 					print(paste("nls function did not fit", plotTitle, e))
 			})
@@ -86,8 +86,6 @@ ch.plot.pHit <- function (x,y, plotTitle = NA, filename=NULL, cex1 = 1, printR2 
 				nlsFit.r2<-1-( var(resid(nlsFit))/( var(resid(nlsFit))+var(fitted(nlsFit))))
 				if (printR2) {
 					r2 <- round(nlsFit.r2, d=2)
-					# mtext(side=4, expression(paste(r^{2}, "=", sep="")),line=-3,at=c(0), cex = cex1)
-					# mtext(side=4,round(summary(nlsFit.r2),d=2), line=-2, at=c(0), cex = cex1)
 					mtext(side=2, bquote(r^2==.(r2)), line=0, at = -.2, cex = .8*cex1)
 				}
 				nls.beta <- coef(nlsFit)
