@@ -1,0 +1,81 @@
+?rowsums
+?rowSums
+library(reshape2)#
+library(plyr)#
+library(chValues)#
+#
+  ### Load dbfile with parameters#
+  params<-read.table("combValueDBfile.txt",row.names=1,header = F,sep=",")#
+#
+  #### Filenames#
+  bootstrapOutdataFile <- as.character(params['bootstrapOutdataFile',1])#
+  bootstrapOutdataFile2 <- as.character(params['bootstrapOutdataFile2',1])#
+  combinedDataOutFile <- as.character(params['combinedDataOutFile',1])#
+  sameItemOutFile <- as.character(params['sameItemOutFile',1])#
+  dataFile1 <- as.character(params['dataFile1',1])#
+  dataFile2 <- as.character(params['dataFile2',1])#
+#
+  ######_____SET SWITCHES AND THRESHOLDS______#######
+  minNumPerSide <- as.numeric(as.character(params['minNumPerSide',1]))#
+  maxNumPerSide <- as.numeric(as.character(params['maxNumPerSide',1]))#
+  numRuns <- as.numeric(as.character(params['numRuns',1]))#
+  sdThresh <- as.numeric(as.character(params['sdThresh',1]))#
+#
+###### read in datasets#
+#
+  DataIn1 <-read.table(dataFile1, header=T, sep="\t", quote="\"")#
+  DataIn2 <-read.table(dataFile2, header=T, sep="\t", quote="\"")
+head(DataIn2)
+with(DataIn2, min(DataIn2[DataIn2$resp>0,"resp"]))
+with(DataIn2, min(DataIn2[DataIn2$resp>0 & DataIn2$resp<1,"resp"]))
+with(DataIn1, min(DataIn2[DataIn1$resp>0 & DataIn1$resp<1,"resp"]))
+with(DataIn1, min(DataIn1[DataIn1$resp>0 & DataIn1$resp<1,"resp"]))
+with(DataIn1, min(DataIn1$resp<1,"resp"]))
+(min(DataIn1[DataIn1$resp>0 & DataIn1$resp<1,"resp"]))
+(min(DataIn1[DataIn1$resp<1,"resp"]))
+((DataIn2[DataIn2$resp>0 & DataIn2$resp<1,"resp"]))
+((DataIn1[DataIn1$resp>0 & DataIn1$resp<1,"resp"]))
+((DataIn2[DataIn2$resp>0 & DataIn2$resp<0,"resp"]))
+((DataIn2[DataIn2$resp<0,"resp"]))
+((DataIn1[DataIn1$resp<0,"resp"]))
+((DataIn2[DataIn2$resp==0,"resp"]))
+((DataIn2[DataIn2$probe=="terrorist","resp"]))
+head(DataIn2)
+((DataIn2[DataIn2$probe=="a terrorist","resp"]))
+((DataIn2[DataIn2$probe=="a terrorist","tValue"]))
+with(DataIn2, min(DataIn2[DataIn2$resp>0 & DataIn2$resp<1,"resp"]))
+log(with(DataIn2, min(DataIn2[DataIn2$resp>0 & DataIn2$resp<1,"resp"])))
+((DataIn2[DataIn2$probe=="a terrorist","resp"]))
+decimalplaces <- function(x) {#
+    if (abs(x - round(x)) > .Machine$double.eps^0.5) {#
+        nchar(strsplit(sub('0+$', '', as.character(x)), ".", fixed = TRUE)[[1]][[2]])#
+    } else {#
+        return(0)#
+    }#
+}
+decimalplaces (.0004)
+(max(DataIn1$resp))
+(max(DataIn1$TResp))
+(max(DataIn1$tVesp))
+(max(DataIn1$tValue))
+hist((DataIn2[DataIn2$probe=="a terrorist","resp"]))
+hist((DataIn2[DataIn2$probe=="a terrorist","tValue"]))
+hist((DataIn2[DataIn2$probe=="an adult","tValue"]))
+hist((DataIn2[DataIn2$probe=="your mother","tValue"]))
+hist((DataIn2[DataIn2$probe=="a mother","tValue"]))
+hist((DataIn2[DataIn2$probe=="your father","tValue"]))
+hist((DataIn1[DataIn1$probe=="your father","tValue"]))
+hist((DataIn1[DataIn1$probe=="your mother","tValue"]))
+levels(DataIn2)
+levels(DataIn2$probe)
+levels(DataIn2$promt)
+levels(DataIn2$prompt)
+hist((DataIn1[DataIn1$prompt=="your mother","tValue"]))
+hist((DataIn2[DataIn2$prompt=="your mother","tValue"]))
+hist((DataIn2[DataIn2$prompt=="your father","tValue"]))
+((DataIn2[DataIn2$prompt=="your father","tValue"]))
+wd <- getwd()#
+library(devtools)#
+library(roxygen2)#
+setwd("~/Dropbox/UNCW/Active UNCW/research/Programming/R Packages/chutils")#
+document()

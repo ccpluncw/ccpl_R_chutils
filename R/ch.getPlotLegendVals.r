@@ -2,15 +2,16 @@
 #'
 #' This function creates unique color and line type values for groups to be plotted.
 #' @param df.grpIndex a dataframe containing a column for each grouping variable with the values containing the combination of those variables that are to be plotted. The last column should be the index number for the model that will be used for plotting.  This dataframe is output by the ch.subsetDFbyGroups() function.
-#' @param groupsToPlot a vector of up to two strings containing the column names in df.grpIndex that the legend will be created for.
 #' @keywords plot group grouping variables legend lty colors
-#' @return .
+#' @return this returns a dataframe containing the folloing columns: indexNum (the index number of the dataframe from ch.subsetDFbyGroups()); lty (the line type values for the graph); the group column names; h (the hue for hsv() color of line); s (the saturation for hsv() color of line);v (the intensity for hsv() color of line)
 #' @export
 #' @examples ch.getPlotLegendVals(df.Index)
 
 ch.getPlotLegendVals <- function (df.grpIndex) {
 
     grpCols <- names(df.grpIndex)
+    #remove the index number column
+    grpCols <- grpCols[grpCols !="indexNum"]
     nGrps <- length(grpCols)
     #use only the first two columns
     if(nGrps > 2) {
@@ -36,7 +37,8 @@ ch.getPlotLegendVals <- function (df.grpIndex) {
     df.levelLgnd <- list()
     for(i in 1:nGrps) {
       tmpDF <- list()
-      gLevels <- unique(df.grpIndex[,as.character(df.grpInfo$grpName[i])])
+      #sort group names so the same legend values are used across experiments
+      gLevels <- sort(as.character(unique(df.grpIndex[,as.character(df.grpInfo$grpName[i])])))
       tmpDF[[as.character(df.grpInfo$grpName[i])]] <- gLevels
       for(j in 1:df.grpInfo$nLevels[i]) {
         if(i == 2) {
@@ -63,6 +65,7 @@ ch.getPlotLegendVals <- function (df.grpIndex) {
       outDF <- tmpDF
       outDF$lty <- "solid"
     }
+    outDF$lty <- as.character(outDF$lty)
     return(outDF)
 
 }
