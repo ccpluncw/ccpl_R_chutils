@@ -11,12 +11,18 @@
 
 ch.getPhitModel <- function (pHitFit, yLab = "p(Hit)", xLab = expression(paste("", Psi,"(value) Distributional overlap", sep=""))) {
 
-  var <- all.vars(formula(pHitFit)[[3]])[1]
-  beta <- as.vector(coef(pHitFit)[1])
+  if(is.null(pHitFit)) {
+    outList <- list(model = NA, vars = NA, xLab = NA, yLab = NA, modelType = "pHit")
 
-  model <- bquote(.5*(1-(.(as.name(var))^.(beta) ))+.5)
+  } else {
+    var <- all.vars(formula(pHitFit)[[3]])[1]
+    beta <- as.vector(coef(pHitFit)[1])
 
-  outList <- list(model = model, vars = var, xLab = xLab, yLab = yLab, modelType = "pHit")
+    model <- bquote(.5*(1-(.(as.name(var))^.(beta) ))+.5)
+
+    outList <- list(model = model, vars = var, xLab = xLab, yLab = yLab, modelType = "pHit")
+
+  }
 
   return(outList)
 }
