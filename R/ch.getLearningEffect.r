@@ -33,8 +33,8 @@ ch.getLearningEffect <- function (data, x, y, a = 2000, b = -1, c = 100, ...) {
   }
   if (is.null(out.nls)) {
     tryCatch (
-          out.nls<-nls(y~a + b*(x-1), data=dfIn, start=list(a=2000, b=-1), control = nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE)),
-          error = function (w) return (NULL)
+          out.nls<-lm(y~x,data=dfIn),
+            error = function (w) return (NULL)
         )
   }
   return(out.nls)
