@@ -4,9 +4,15 @@
 \alias{ch.calculateDprimeStats}
 \title{A function to calculate D Prime statistics}
 \usage{
-ch.calculateDprimeStats(data, grpCols, correctCol, correctVals = c(TRUE,
-  FALSE), targetPresentCol, targetPresentVals = c(TRUE, FALSE),
-  addCorrection = TRUE)
+ch.calculateDprimeStats(
+  data,
+  grpCols,
+  correctCol,
+  correctVals = c(TRUE, FALSE),
+  targetPresentCol,
+  targetPresentVals = c(TRUE, FALSE),
+  addCorrection = TRUE
+)
 }
 \arguments{
 \item{data}{a dataframe with the trial by trial responses.}

@@ -4,8 +4,7 @@
 \alias{ch.filterDataBetween}
 \title{A function to filter data between two thresholds}
 \usage{
-ch.filterDataBetween(data, dataCol, lowThresh = NULL,
-  highThresh = NULL)
+ch.filterDataBetween(data, dataCol, lowThresh = NULL, highThresh = NULL)
 }
 \arguments{
 \item{data}{a dataframe containing the data.}

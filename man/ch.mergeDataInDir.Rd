@@ -4,8 +4,14 @@
 \alias{ch.mergeDataInDir}
 \title{Merge all the files in a directory}
 \usage{
-ch.mergeDataInDir(directoryName, outputFile, extension = ".dat",
-  sep = "\\t", header = T, ...)
+ch.mergeDataInDir(
+  directoryName,
+  outputFile,
+  extension = ".dat",
+  sep = "\\t",
+  header = T,
+  ...
+)
 }
 \arguments{
 \item{directoryName}{this is a string that specifies the name of the directory containing the datafiles.}

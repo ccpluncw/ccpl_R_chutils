@@ -16,12 +16,12 @@ ch.updateRpackage <- function(packageRoot = "~/Dropbox/UNCW/Active UNCW/research
   library(devtools)
   library(roxygen2)
 
-  wd <- getwd()
+  wd1 <- getwd()
   packageDir <- paste(packageRoot, packageName, sep="/")
   setwd(packageDir)
   document()
   setwd(packageRoot)
   install(packageName)
-  setwd(wd)
+  setwd(wd1)
 
 }

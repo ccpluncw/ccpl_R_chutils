@@ -13,14 +13,14 @@ ch.BIC(y, fitY, numParameters, standardize = FALSE)
 
 \item{numParameters}{The number of free parameters.}
 
-\item{standardize}{BIC is a function of the number of observations. If you wants correct for the number of observations, then set "standardize" to TRUE. DEFAULT = FALSE.
+\item{standardize}{A boolean that specifies whether to standardize the scores before calculating the BIC. Standardization is useful if you want to combine different DVs into a single BIC (e.g., RT and accuracy). DEFAULT = FALSE.
 '}
 }
 \value{
 the BIC.
 }
 \description{
-This function calculates the BIC from a model fit.  The empirical Y and the fit Y, as well as the number of free parameters are input.  The BIC is output.  BIC is a function of the number of observations. If one wants correct for the number of observations, then set "standardize" to TRUE.
+This function calculates the BIC from a model fit.  The empirical Y and the fit Y, as well as the number of free parameters are input.  The BIC is output.  If one wants standardize Y and the fit Y before calculation, then set "standardize" to TRUE.
 }
 \examples{
 ch.BIC (myY, fitY, 5)

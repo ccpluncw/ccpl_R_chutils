@@ -4,8 +4,13 @@
 \alias{ch.ZtestDprimeEqualZero}
 \title{A function tests whether a dPrime is significantly Greater than/different from Zero}
 \usage{
-ch.ZtestDprimeEqualZero(NtargetPresent, NtargetAbsent, probFA, probHit,
-  oneTailed = TRUE)
+ch.ZtestDprimeEqualZero(
+  NtargetPresent,
+  NtargetAbsent,
+  probFA,
+  probHit,
+  oneTailed = TRUE
+)
 }
 \arguments{
 \item{NtargetPresent}{the number of target present trials.}

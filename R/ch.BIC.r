@@ -1,11 +1,11 @@
 #' A function calculate the BIC from a model fit
 #'
-#' This function calculates the BIC from a model fit.  The empirical Y and the fit Y, as well as the number of free parameters are input.  The BIC is output.  BIC is a function of the number of observations. If one wants correct for the number of observations, then set "standardize" to TRUE.
+#' This function calculates the BIC from a model fit.  The empirical Y and the fit Y, as well as the number of free parameters are input.  The BIC is output.  If one wants standardize Y and the fit Y before calculation, then set "standardize" to TRUE.
 #'
 #' @param y A numeric vector containing the empirical Y from the data.
 #' @param fitY A numeric vector containing the fit Y from the model.
 #' @param numParameters The number of free parameters.
-#' @param standardize BIC is a function of the number of observations. If you wants correct for the number of observations, then set "standardize" to TRUE. DEFAULT = FALSE.
+#' @param standardize A boolean that specifies whether to standardize the scores before calculating the BIC. Standardization is useful if you want to combine different DVs into a single BIC (e.g., RT and accuracy). DEFAULT = FALSE.
 #''
 #' @keywords BIC
 #' @return the BIC.
@@ -13,22 +13,30 @@
 #' @examples ch.BIC (myY, fitY, 5)
 
 
+# ch.BIC <- function(y, fitY, numParameters, standardize = FALSE) {
+#
+# 	if (standardize) {
+# 		resids <- scale(y) - scale(fitY)
+# 	} else {
+# 		resids <- y - fitY
+# 	}
+#
+# 	p <- numParameters
+# 	n <- length(resids)
+#
+# 	rss <- sum(resids^2, na.rm = T)
+#
+# 	BIC <- n + n * log(2 * pi) + n * log(rss/n) + log(n)*(p+1)
+#
+# 	return (BIC)
+# }
+
 ch.BIC <- function(y, fitY, numParameters, standardize = FALSE) {
 
-	resids <- y - fitY
-	p <- numParameters
-	###
-	# resids = a vector of residuals from your model fit
-	# p = number of free parameters
-	#####
+	#get length without NAs
+	n <- length(y[!is.na(y)])
+	rss <- ch.RSS(y, fitY, standardize = standardize)
+	BIC <- ch.ICfromRSS(rss = rss, n = n, numParameters, ICtype = "BIC")
 
-	n <- length(resids)
-	rss <- sum(resids^2, na.rm = T)
-
-	BIC <- n + n * log(2 * pi) + n * log(rss/n) + log(n)*(p+1)
-
-	if (standardize) {
-		BIC <- BIC/n
-	}
 	return (BIC)
 }
