@@ -11,6 +11,9 @@ ch.newDir(mainDir, subDir)
 
 \item{subDir}{the new subdirectory.}
 }
+\value{
+a boolean that specifies whether the subDir already exists (TRUE/FALSE).
+}
 \description{
 This function creates a new subdirectory and moves into it. If the subdirectory already exist, then it just moves into it.
 }

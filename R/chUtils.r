@@ -15,18 +15,22 @@ ch.round_any <-  function(x, accuracy, f=round){f(x/ accuracy) * accuracy}
 #' This function creates a new subdirectory and moves into it. If the subdirectory already exist, then it just moves into it.
 #' @param mainDir the directory under which the subdirectory will exist.
 #' @param subDir the new subdirectory.
+#' @return a boolean that specifies whether the subDir already exists (TRUE/FALSE).
 #' @keywords new directory
 #' @export
 #' @examples ch.newDir (currentDir, newDir)
 
 
 ch.newDir <- function (mainDir, subDir) {
-		if (file.exists(subDir)){
+		subDirExists <- FALSE
+		if (file.exists(file.path(mainDir,subDir))) {
 	    setwd(file.path(mainDir, subDir))
+			subDirExists <- TRUE
 		} else {
 	    dir.create(file.path(mainDir, subDir))
 	    setwd(file.path(mainDir, subDir))
 		}
+		return(subDirExists)
 }
 
 #' Permutation Function
