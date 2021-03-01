@@ -4,19 +4,9 @@
 \alias{ch.plot.learning}
 \title{A function to plot the learning effect in data}
 \usage{
-ch.plot.learning(
-  x,
-  y,
-  fit = NULL,
-  plotTitle = NA,
-  filename = NULL,
-  cex1 = 1,
-  yLabel = NA,
-  xLabel = "Trial Number",
-  ylimMin = 0,
-  ylimMax = 0,
-  ...
-)
+ch.plot.learning(x, y, fit = NULL, plotTitle = NA, filename = NULL,
+  cex1 = 1, yLabel = NA, xLabel = "Trial Number", ylimMin = 0,
+  ylimMax = 0, ...)
 }
 \arguments{
 \item{x}{a vector containing the x variable.}

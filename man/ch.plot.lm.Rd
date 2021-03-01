@@ -4,19 +4,10 @@
 \alias{ch.plot.lm}
 \title{Graph function for Values Experiment}
 \usage{
-ch.plot.lm(
-  x,
-  y,
-  plotTitle = NA,
-  filename = NULL,
-  cex1 = 1,
-  printR2 = T,
-  yLabel = NA,
-  ylimMin = 0,
-  ylimMax = 0,
-  xlab = expression(paste("", Psi, "(value) Distributional overlap", sep = "")),
-  ...
-)
+ch.plot.lm(x, y, plotTitle = NA, filename = NULL, cex1 = 1,
+  printR2 = T, yLabel = NA, ylimMin = 0, ylimMax = 0,
+  xlab = expression(paste("", Psi, "(value) Distributional overlap", sep
+  = "")), ...)
 }
 \arguments{
 \item{x}{the x variable for the x-axis (often overlap).}

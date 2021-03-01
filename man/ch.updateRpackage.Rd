@@ -4,10 +4,9 @@
 \alias{ch.updateRpackage}
 \title{A function to update an R package}
 \usage{
-ch.updateRpackage(
-  packageRoot = "~/Dropbox/UNCW/Active UNCW/research/Programming/R Packages",
-  packageName = NULL
-)
+
+  ch.updateRpackage(packageRoot = "~/Dropbox/UNCW/Active UNCW/research/Programming/R Packages",
+  packageName = NULL)
 }
 \arguments{
 \item{packageRoot}{the directory in which the R package directory resides. DEFAULT = my computers packageRoot.}

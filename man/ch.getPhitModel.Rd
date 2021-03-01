@@ -4,11 +4,8 @@
 \alias{ch.getPhitModel}
 \title{a function to return a p(Hit) model that can be evaluated (i.e, an expression) from an nls object}
 \usage{
-ch.getPhitModel(
-  pHitFit,
-  yLab = "p(Hit)",
-  xLab = expression(paste("", Psi, "(value) Distributional overlap", sep = ""))
-)
+ch.getPhitModel(pHitFit, yLab = "p(Hit)", xLab = expression(paste("",
+  Psi, "(value) Distributional overlap", sep = "")))
 }
 \arguments{
 \item{pHitFit}{an nls object - specifically from ch.plot.pHit().}

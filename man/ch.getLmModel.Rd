@@ -4,11 +4,8 @@
 \alias{ch.getLmModel}
 \title{a function to return an LM model that can be evaluated (i.e, an expression) from an lm object}
 \usage{
-ch.getLmModel(
-  linearFit,
-  yLab = NULL,
-  xLab = expression(paste("", Psi, "(value) Distributional overlap", sep = ""))
-)
+ch.getLmModel(linearFit, yLab = NULL, xLab = expression(paste("", Psi,
+  "(value) Distributional overlap", sep = "")))
 }
 \arguments{
 \item{linearFit}{an lm object.}
