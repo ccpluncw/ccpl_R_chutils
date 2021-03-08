@@ -4,10 +4,26 @@
 \alias{ch.plotTwoLinearFits}
 \title{A function to fit and plot two linear function one over the other.}
 \usage{
-ch.plotTwoLinearFits(data, xCol, y1Col, y2Col, minN = NULL,
-  y1Label = NA, y2Label = NA, parOp = NULL, cex1 = 1.25,
-  cex.topTile = 1.25, printR2 = T, topTitle = NULL, ylimMin1 = 0,
-  ylimMax1 = 0, ylimMin2 = 0, ylimMax2 = 0, filename = NULL, ...)
+ch.plotTwoLinearFits(
+  data,
+  xCol,
+  y1Col,
+  y2Col,
+  minN = NULL,
+  y1Label = NA,
+  y2Label = NA,
+  parOp = NULL,
+  cex1 = 1.25,
+  cex.topTile = 1.25,
+  printR2 = T,
+  topTitle = NULL,
+  ylimMin1 = 0,
+  ylimMax1 = 0,
+  ylimMin2 = 0,
+  ylimMax2 = 0,
+  filename = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{a dataframe.}

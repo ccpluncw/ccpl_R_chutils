@@ -4,10 +4,23 @@
 \alias{ch.stripPlotByGrp}
 \title{A function to plot a strip chart by groups.}
 \usage{
-ch.stripPlotByGrp(data, xCol, xSortColBy, grpCols, grpLgndNames = NULL,
-  filename = NULL, lgndPlacement = "topright", cex1 = 1,
-  cexLegend = 0.75, ylim = c(-1, 1), yLab = NA, pch = 1, las = 2,
-  parOp = NULL, ...)
+ch.stripPlotByGrp(
+  data,
+  xCol,
+  xSortColBy,
+  grpCols,
+  grpLgndNames = NULL,
+  filename = NULL,
+  lgndPlacement = "topright",
+  cex1 = 1,
+  cexLegend = 0.75,
+  ylim = c(-1, 1),
+  yLab = NA,
+  pch = 1,
+  las = 2,
+  parOp = NULL,
+  ...
+)
 }
 \arguments{
 \item{data}{a dataframe.}

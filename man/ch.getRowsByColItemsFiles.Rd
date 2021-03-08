@@ -4,19 +4,16 @@
 \alias{ch.getRowsByColItemsFiles}
 \title{A function to extract the rows in FileA that contain the elements in FileB.}
 \usage{
-ch.getRowsByColItemsFiles(datafile, itemColName, colItemFile,
-  saveFile = NULL)
+ch.getRowsByColItemsFiles(datafile, itemColName, colItemFile, saveFile = NULL)
 }
 \arguments{
-\item{datafile}{a string specifying the name of the file containing a dataframe (i.e., FileA).}
+\item{datafile}{a string specifying the name of the file containing the vector of elements used to identify the rows to extract from the datafile (i.e., FileB).}
 
 \item{itemColName}{a string specifying the column name in the datafile that contains the items to be matched.}
 
 \item{colItemFile}{a file containing a dataframe (i.e., FileA).}
 
 \item{saveFile}{a string specifying the name of the file to save the output. DEFAULT = NULL (no output).}
-
-\item{datafile}{a string specifying the name of the file containing the vector of elements used to identify the rows to extract from the datafile (i.e., FileB).}
 }
 \value{
 a dataframe containing the extracted rows.

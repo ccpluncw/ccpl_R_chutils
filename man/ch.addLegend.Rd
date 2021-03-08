@@ -4,9 +4,18 @@
 \alias{ch.addLegend}
 \title{A function to add a legend to a plot}
 \usage{
-ch.addLegend(df.legend, grpCols, placement = "topright", horiz = T,
-  lwd = 1, cexLegend = 0.5, bty = "n", includeTitle = T,
-  inset = c(-0.3, 0), ...)
+ch.addLegend(
+  df.legend,
+  grpCols,
+  placement = "topright",
+  horiz = T,
+  lwd = 1,
+  cexLegend = 0.5,
+  bty = "n",
+  includeTitle = T,
+  inset = c(-0.3, 0),
+  ...
+)
 }
 \arguments{
 \item{df.legend}{a legend dataframe created by ch.getPlotLegendVals().}
