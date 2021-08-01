@@ -11,7 +11,7 @@ ch.getPhitModel(
 )
 }
 \arguments{
-\item{pHitFit}{an nls object - specifically from ch.plot.pHit().}
+\item{pHitFit}{an nls object - specifically from ch.pHVOfit().}
 }
 \value{
 expression with of the best fitting model (with parameters and predictor variables)

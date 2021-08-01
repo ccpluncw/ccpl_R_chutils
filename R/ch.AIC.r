@@ -12,24 +12,6 @@
 #' @export
 #' @examples ch.AIC (myY, fitY, 5)
 
-
-# ch.AIC <- function (y, fitY, numParameters, standardize = FALSE) {
-#
-#   if (standardize) {
-#     resids <- scale(y) - scale(fitY)
-#   } else {
-#     resids <- y - fitY
-#   }
-#   p <- numParameters
-#
-#   n <- length(resids)
-#   rss <- sum(resids^2, na.rm = T)
-#
-#   AIC <- n * log(rss/n) + 2*p
-#
-#   return (AIC)
-# }
-
 ch.AIC <- function(y, fitY, numParameters, standardize = FALSE) {
 
 	#get length without NAs

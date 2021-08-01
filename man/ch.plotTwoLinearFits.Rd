@@ -67,7 +67,7 @@ a list containing: y1Fit = lm object with the fit of the y1 data; y2Fit = the lm
 This function fits  two linear functions;  plots the two functions on a single graph; and returns a list with the fit statistics.
 }
 \examples{
-ch.moralsRTpHitFit (data=moralsData,"overlapRound", "resdRT", "correct", c("yes", "no"), filename = "plot.pdf")
+ch.plotTwoLinearFits (data=moralsData,"overlapRound", "resdRT", "correct", c("yes", "no"), filename = "plot.pdf")
 }
 \keyword{fit}
 \keyword{linear}

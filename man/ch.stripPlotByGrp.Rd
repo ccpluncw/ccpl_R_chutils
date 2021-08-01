@@ -8,7 +8,7 @@ ch.stripPlotByGrp(
   data,
   xCol,
   xSortColBy,
-  grpCols,
+  grpCols = NULL,
   grpLgndNames = NULL,
   filename = NULL,
   lgndPlacement = "topright",
@@ -29,7 +29,7 @@ ch.stripPlotByGrp(
 
 \item{xSortColBy}{a string the specifies the column name in "data" that contains the variable for to sort the xColumn by.}
 
-\item{grpCols}{a vector of strings the specifies the column names in "data" that contain the DVs for each group. The order is this vector matters, so sort them in the order you want them graphed (the colors will be relevant). This function depends on a "wide" format. So, each level of each group is in a separate column.}
+\item{grpCols}{a vector of strings the specifies the column names in "data" that contain the DVs for each group. The order is this vector matters, so sort them in the order you want them graphed (the colors will be relevant). This function depends on a "wide" format. So, each level of each group is in a separate column. DEFAULT = NULL}
 
 \item{grpLgndNames}{a vector of strings the specifies the names you want each group to be called in the legend. The order is this vector matters, so sort them in the same order as grpCols.}
 

@@ -11,7 +11,7 @@
 #' @keywords dprime analysis
 #' @return dataframe with the dprime statistics:
 #' @export
-#' @examples ch.moralsSnRTpHit (data=moralsData,"sn", "trial", "RT", "res.RT", "fit.RT", "overlap", "keyDef", c("Yes", "No"), "correct", params=parameters)
+#' @examples ch.calculateDprimeStats (data=moralsData,"sn", "trial", "RT", "res.RT", "fit.RT", "overlap", "keyDef", c("Yes", "No"), "correct", params=parameters)
 
 
 ch.calculateDprimeStats <- function (data, grpCols, correctCol, correctVals = c(TRUE, FALSE), targetPresentCol, targetPresentVals = c(TRUE, FALSE), addCorrection = TRUE) {

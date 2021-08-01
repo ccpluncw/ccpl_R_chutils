@@ -61,6 +61,7 @@ ch.permute <- function(n){
 #' This function creates a graph of p(hit) (0-1 on y-axis) as a function of an x variable (often overlap). It aldo fits a non-linear function to the data whereby the first point is 1 and the last point is .5. It outputs the fit of the function.
 #' @param x the x variable for the x-axis (often overlap).
 #' @param y the y variable for the y-axis (often p(hit)).
+#' @param useTwoParameterModel A boolean that specifies whether to use a two parameter model.  If this is set to TRUE, then this function will fit a model whereby the rightmost point (overlap = 1.0) is not fixed at p(HVO) = 0.5. DEFAULT = FALSE.
 #' @param plotTitle a string with the title of the plot.
 #' @param filename a string with the filename of the pdf of the file to be saved.  DEFAULT = NULL; no file saved.
 #' @param cex1 a numeric value for cex: the relative size of the text in the graph. cex1 > 1 is bigger; cex1 < 1 is smaller. DEFAULT=1.
@@ -71,39 +72,51 @@ ch.permute <- function(n){
 #' @export
 #' @examples ch.plot.pHit (x,y)
 
-ch.plot.pHit <- function (x,y, plotTitle = NA, filename=NULL, cex1 = 1, printR2 = T,yLabel="p(hit)", ...) {
-	#	par(mfrow=c(1,1), bg="white",  bty="n", font=2, family='serif', mar=c(5,6,4,7), las=1, cex=2)
+ch.plot.pHit <- function (x,y, useTwoParameterModel = FALSE, plotTitle = NA, filename=NULL, cex1 = 1, printR2 = T,yLabel="p(HVO)", ...) {
+
 		plot(x, y, main=plotTitle, xlab= expression(paste("", Psi,"(value) Distributional overlap", sep="")), ylab=NA, pch=16, ylim = c(0,1), ...)
 		mtext(side=2,yLabel, line=3, cex = cex1)
 
-			nlsFit = NULL
-			nlsFit.r2 = NULL
-			tryCatch ({
-				nlsFit <- nls(y~.5*(1-(x^b))+.5,  start=list(b=1), control = nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE), algorithm = "port", upper = list(b=30))
-				}, error = function(e) {
-					print(paste("nls function did not fit", plotTitle, e))
-			})
+		pHVOFit <- ch.pHVOfit(x, y, useTwoParameterModel = useTwoParameterModel)
 
-			if (!is.null(nlsFit)) {
-				abline(a=0.5,b=0,col="grey", lwd=2)
-				lines(x, predict(nlsFit), col="black", lwd=3)
-				nlsFit.r2<-1-( var(resid(nlsFit))/( var(resid(nlsFit))+var(fitted(nlsFit))))
-				if (printR2) {
-					r2 <- round(nlsFit.r2, d=2)
-					mtext(side=2, bquote(r^2==.(r2)), line=0, at = -.2, cex = .8*cex1)
-				}
-				nls.beta <- coef(nlsFit)
-			} else {
-				nlsFit.r2 <- NA
-				nls.beta <- NA
+		if (!is.null(pHVOFit$nlsObject)) {
+			abline(a=0.5,b=0,col="grey", lwd=2)
+			lines(x, predict(pHVOFit$nlsObject), col="black", lwd=3)
+			if (printR2) {
+				r2 <- round(pHVOFit$r2, d=2)
+				mtext(side=2, bquote(r^2==.(r2)), line=0, at = -.2, cex = .8*cex1)
 			}
+		}
+			#
+			# nlsFit = NULL
+			# nlsFit.r2 = NULL
+			# tryCatch ({
+			# 	nlsFit <- nls(y~.5*(1-(x^b))+.5,  start=list(b=1), control = nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE), algorithm = "port", upper = list(b=30))
+			# 	}, error = function(e) {
+			# 		print(paste("nls function did not fit", plotTitle, e))
+			# })
+
+			# if (!is.null(nlsFit)) {
+			# 	abline(a=0.5,b=0,col="grey", lwd=2)
+			# 	lines(x, predict(nlsFit), col="black", lwd=3)
+			# 	nlsFit.r2<-ch.R2( y, fitY= fitted(nlsFit))
+			# 	if (printR2) {
+			# 		r2 <- round(nlsFit.r2, d=2)
+			# 		mtext(side=2, bquote(r^2==.(r2)), line=0, at = -.2, cex = .8*cex1)
+			# 	}
+			# 	nls.beta <- coef(nlsFit)
+			# } else {
+			# 	nlsFit.r2 <- NA
+			# 	nls.beta <- NA
+			# }
 
 			if (!is.null(filename)) {
 				dev.copy(pdf, filename, width=8, height=8)
 				dev.off();
 			}
 
-			return (list(nlsObject = nlsFit, beta = nls.beta, r2 = nlsFit.r2))
+#			return (list(nlsObject = nlsFit, beta = nls.beta, r2 = nlsFit.r2))
+			return (pHVOFit)
 }
 
 #' Graph function for Values Experiment

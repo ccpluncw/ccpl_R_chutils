@@ -7,11 +7,12 @@
 ch.plot.pHit(
   x,
   y,
+  useTwoParameterModel = FALSE,
   plotTitle = NA,
   filename = NULL,
   cex1 = 1,
   printR2 = T,
-  yLabel = "p(hit)",
+  yLabel = "p(HVO)",
   ...
 )
 }
@@ -19,6 +20,8 @@ ch.plot.pHit(
 \item{x}{the x variable for the x-axis (often overlap).}
 
 \item{y}{the y variable for the y-axis (often p(hit)).}
+
+\item{useTwoParameterModel}{A boolean that specifies whether to use a two parameter model.  If this is set to TRUE, then this function will fit a model whereby the rightmost point (overlap = 1.0) is not fixed at p(HVO) = 0.5. DEFAULT = FALSE.}
 
 \item{plotTitle}{a string with the title of the plot.}
 

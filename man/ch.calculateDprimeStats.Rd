@@ -36,7 +36,7 @@ dataframe with the dprime statistics:
 This function calculated D Prime statistics.
 }
 \examples{
-ch.moralsSnRTpHit (data=moralsData,"sn", "trial", "RT", "res.RT", "fit.RT", "overlap", "keyDef", c("Yes", "No"), "correct", params=parameters)
+ch.calculateDprimeStats (data=moralsData,"sn", "trial", "RT", "res.RT", "fit.RT", "overlap", "keyDef", c("Yes", "No"), "correct", params=parameters)
 }
 \keyword{analysis}
 \keyword{dprime}

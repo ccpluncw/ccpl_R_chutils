@@ -12,25 +12,6 @@
 #' @export
 #' @examples ch.BIC (myY, fitY, 5)
 
-
-# ch.BIC <- function(y, fitY, numParameters, standardize = FALSE) {
-#
-# 	if (standardize) {
-# 		resids <- scale(y) - scale(fitY)
-# 	} else {
-# 		resids <- y - fitY
-# 	}
-#
-# 	p <- numParameters
-# 	n <- length(resids)
-#
-# 	rss <- sum(resids^2, na.rm = T)
-#
-# 	BIC <- n + n * log(2 * pi) + n * log(rss/n) + log(n)*(p+1)
-#
-# 	return (BIC)
-# }
-
 ch.BIC <- function(y, fitY, numParameters, standardize = FALSE) {
 
 	#get length without NAs

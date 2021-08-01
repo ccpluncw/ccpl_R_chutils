@@ -21,7 +21,7 @@
 #' @keywords linear fit two plots
 #' @return a list containing: y1Fit = lm object with the fit of the y1 data; y2Fit = the lm  object with the fit of the y2 data.
 #' @export
-#' @examples ch.moralsRTpHitFit (data=moralsData,"overlapRound", "resdRT", "correct", c("yes", "no"), filename = "plot.pdf")
+#' @examples ch.plotTwoLinearFits (data=moralsData,"overlapRound", "resdRT", "correct", c("yes", "no"), filename = "plot.pdf")
 
 ch.plotTwoLinearFits <- function (data, xCol, y1Col, y2Col, minN = NULL, y1Label = NA, y2Label = NA, parOp = NULL, cex1 = 1.25, cex.topTile =1.25, printR2 = T, topTitle = NULL, ylimMin1 = 0, ylimMax1 = 0, ylimMin2 = 0, ylimMax2 = 0, filename = NULL, ...) {
 
