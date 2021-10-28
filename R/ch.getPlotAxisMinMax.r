@@ -8,11 +8,11 @@
 #' @export
 #' @examples ch.getPlotAxisMinMax (xAxisVals)
 
-ch.getPlotAxisMinMax <- function (variable, pBuffer = 0.1) {
+ch.getPlotAxisMinMax <- function (x, pBuffer = 0.1) {
 
-  buffer = (max(variable, na.rm=T) - min(variable, na.rm=T)) * 0.1
-  minV = min(variable, na.rm=T) - buffer
-  maxV = max(variable, na.rm=T) + buffer
+  buffer = (max(x, na.rm=T) - min(x, na.rm=T)) * pBuffer
+  minV = min(x, na.rm=T) - buffer
+  maxV = max(x, na.rm=T) + buffer
 
   return(c(minV, maxV))
 }

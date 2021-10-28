@@ -4,7 +4,7 @@
 \alias{ch.getPlotAxisMinMax}
 \title{A function calculates the min and max values for a plot axis}
 \usage{
-ch.getPlotAxisMinMax(variable, pBuffer = 0.1)
+ch.getPlotAxisMinMax(x, pBuffer = 0.1)
 }
 \arguments{
 \item{variable}{a numeric array from which you the axis values are derived (usually just a vector).}

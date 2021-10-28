@@ -3,12 +3,28 @@
 #' This function rounds numbers to a specified precision to in a particular direction.
 #' @param x a vector of numbers.
 #' @param accuracy the accuracy of the rounding.
-#' @param f the function for rounding: floor, ceiling, round.
+#' @param f the function for rounding: floor, ceiling, round. DEFAULT = ceiling
+#' @param center a boolean specifying whether to center the bin label in the ceiling and floor cases. DEFAULT = TRUE
 #' @keywords round numbers any
 #' @export
 #' @examples ch.round_any (x, .1, ceiling)
 
-ch.round_any <-  function(x, accuracy, f=round){f(x/ accuracy) * accuracy}
+ch.round_any <-  function(x, accuracy, f=ceiling, center = TRUE){
+
+	out <- f(x/ accuracy) * accuracy
+
+	if(center){
+		#subtract half the accuracy to center the bin
+		if(grepl("ceiling", deparse1(f), fixed=TRUE)) {
+	    out <- out - (accuracy * 0.5)
+	  }
+		#add half the accuracy to center the bin
+	  if(grepl("floor", deparse1(f), fixed=TRUE)) {
+	    out <- out + (accuracy * 0.5)
+	  }
+	}
+	return(out)
+}
 
 #' New Subdrectory Function
 #'
@@ -77,7 +93,7 @@ ch.plot.pHit <- function (x,y, useTwoParameterModel = FALSE, plotTitle = NA, fil
 		plot(x, y, main=plotTitle, xlab= expression(paste("", Psi,"(value) Distributional overlap", sep="")), ylab=NA, pch=16, ylim = c(0,1), ...)
 		mtext(side=2,yLabel, line=3, cex = cex1)
 
-		pHVOFit <- ch.pHVOfit(x, y, useTwoParameterModel = useTwoParameterModel)
+		pHVOFit <- ch.pHVOfit(x, y, grp = NULL, useTwoParameterModel = useTwoParameterModel)
 
 		if (!is.null(pHVOFit$nlsObject)) {
 			abline(a=0.5,b=0,col="grey", lwd=2)
@@ -87,28 +103,6 @@ ch.plot.pHit <- function (x,y, useTwoParameterModel = FALSE, plotTitle = NA, fil
 				mtext(side=2, bquote(r^2==.(r2)), line=0, at = -.2, cex = .8*cex1)
 			}
 		}
-			#
-			# nlsFit = NULL
-			# nlsFit.r2 = NULL
-			# tryCatch ({
-			# 	nlsFit <- nls(y~.5*(1-(x^b))+.5,  start=list(b=1), control = nls.control(minFactor=1/10000000, maxiter=10000, warnOnly = FALSE), algorithm = "port", upper = list(b=30))
-			# 	}, error = function(e) {
-			# 		print(paste("nls function did not fit", plotTitle, e))
-			# })
-
-			# if (!is.null(nlsFit)) {
-			# 	abline(a=0.5,b=0,col="grey", lwd=2)
-			# 	lines(x, predict(nlsFit), col="black", lwd=3)
-			# 	nlsFit.r2<-ch.R2( y, fitY= fitted(nlsFit))
-			# 	if (printR2) {
-			# 		r2 <- round(nlsFit.r2, d=2)
-			# 		mtext(side=2, bquote(r^2==.(r2)), line=0, at = -.2, cex = .8*cex1)
-			# 	}
-			# 	nls.beta <- coef(nlsFit)
-			# } else {
-			# 	nlsFit.r2 <- NA
-			# 	nls.beta <- NA
-			# }
 
 			if (!is.null(filename)) {
 				dev.copy(pdf, filename, width=8, height=8)
@@ -146,7 +140,8 @@ ch.plot.lm <- function (x,y, plotTitle = NA, filename = NULL, cex1 = 1, printR2 
 	}
 		plot(x, y, main=plotTitle, xlab= xlab, ylab=NA, pch=16, ylim=c(ylimMin,ylimMax), ...)
 			lmFit <- lm(y ~ x)
-			abline(lmFit, col="black", lwd=3)
+			lines(x, fitted(lmFit), col="black", lwd=3)
+			#abline(lmFit, col="black", lwd=3)
 			if (printR2) {
 				r2 <- round(summary(lmFit)$r.squared, d=2)
 				mtext(side=2, bquote(r^2==.(r2)), line=0,at=ylimMin - 2 * buffer, cex = .8*cex1)

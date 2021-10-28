@@ -4,14 +4,16 @@
 \alias{ch.round_any}
 \title{New Rounding Function}
 \usage{
-ch.round_any(x, accuracy, f = round)
+ch.round_any(x, accuracy, f = ceiling, center = TRUE)
 }
 \arguments{
 \item{x}{a vector of numbers.}
 
 \item{accuracy}{the accuracy of the rounding.}
 
-\item{f}{the function for rounding: floor, ceiling, round.}
+\item{f}{the function for rounding: floor, ceiling, round. DEFAULT = ceiling}
+
+\item{center}{a boolean specifying whether to center the bin label in the ceiling and floor cases. DEFAULT = TRUE}
 }
 \description{
 This function rounds numbers to a specified precision to in a particular direction.
