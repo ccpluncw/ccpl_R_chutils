@@ -21,7 +21,8 @@ ch.updateRpackage <- function(packageRoot = "~/Dropbox/UNCW/Active UNCW/research
   setwd(packageDir)
   document()
   setwd(packageRoot)
-  install(packageName)
+  #install(packageName)
+  install.packages(packageName, repos = NULL, type = "source")
   setwd(wd1)
 
 }
