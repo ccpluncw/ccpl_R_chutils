@@ -20,4 +20,5 @@ ch.rmLearningEffect <- function (data, x, y, fitCol, resCol, a=1, b=-1, c=1) {
 		data[[fitCol]] <- fitted(fit.nls)
 
 		return(list(data = data, nlsFit = fit.nls))
+		
 }
