@@ -16,6 +16,7 @@ ch.logistic <- function(x, y, parameters = c(bottom = NA, top = NA, slope = 5), 
   data <- data.frame(x = x, y = y)
   df.tmp <- data
 
+  start <- NULL
   if(is.null(fixedMaxX)) {
     #derive maxX from the data with a free parameter
     #to fill the scale start point, one must find the max value of the x parameter.
@@ -31,7 +32,7 @@ ch.logistic <- function(x, y, parameters = c(bottom = NA, top = NA, slope = 5), 
     df.tmp$x <- df.tmp$x - fixedMinX
   }
 
-  start <- NULL
+
   ### if both a and d parameters have a start value do the following
   if(!is.na(parameters["bottom"]) & !is.na(parameters["top"])) {
     start["bottom"] <- parameters["bottom"]
@@ -42,12 +43,12 @@ ch.logistic <- function(x, y, parameters = c(bottom = NA, top = NA, slope = 5), 
     if(!is.na(parameters["bottom"]) | !is.na(parameters["top"])) {
       #check if an a parameter exists
       if(!is.na(parameters["bottom"])) {
-        start["a"] <- parameters["bottom"]
+        start["bottom"] <- parameters["bottom"]
         fml <- as.formula(y ~ bottom + (1-bottom)/(1+exp(slope-scale*x)))
       }
       #check if a d parameter exists
       if(!is.na(parameters["top"])) {
-        start["d"] <- parameters["top"]
+        start["top"] <- parameters["top"]
         fml <- as.formula(y ~ top/(1+exp(slope-scale*x)))
       }
     } else {
@@ -70,7 +71,8 @@ ch.logistic <- function(x, y, parameters = c(bottom = NA, top = NA, slope = 5), 
     data$scale = 10/maxX
   }
 
-  dat.r2.1 <- 1 - dat.nls$m$deviance()/sum((df.tmp$y - mean(df.tmp$y)^2))
+  #dat.r2.1 <- 1 - dat.nls$m$deviance()/sum((df.tmp$y - mean(df.tmp$y)^2))
+  dat.r2.1 <-ch.R2(data$y,data$Fit)
   outList <- list(data = data, fit = dat.nls, r2 = dat.r2.1)
 
   return(outList)
