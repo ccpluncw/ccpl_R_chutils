@@ -5,7 +5,7 @@
 #' @param rss The residual sum of squares from a model fit.
 #' @param n The number of observation from which the rss was calculated.
 #' @param numParameters The number of free parameters.
-#' @param ICtype A string specifying whether to return the AIC or BIC.  Valid inputs are: "AIC" and "BIC".  DEFAULT = "BIC"
+#' @param ICtype A string specifying whether to return the AIC or BIC.  Valid inputs are: "AIC" & "BIC".  DEFAULT = "BIC"
 #''
 #' @keywords BIC AIC IC Information Criterion
 #' @return the AIC or BIC.

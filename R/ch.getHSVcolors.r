@@ -26,23 +26,23 @@ ch.getHSVcolors <- function (numColors, maxIntensityChanges = 8, maxHueChanges =
   }
 
   #find the increments in HSV as a function of the number of changes needed
-  hsvBounds <- data.frame(minH = 0,maxH = 1, minS = .2, maxS = 1, minV = 0, maxV = .8)
+  hsvBounds <- data.frame(minH = 0,maxH = 0.8, minS = .2, maxS = 1, minV = 0.25, maxV = 1)
   hsvBounds$incH <- ch.getHSVincrement(numGroupHues, c(hsvBounds$minH, hsvBounds$maxH))
   hsvBounds$incS <- ch.getHSVincrement(numLevelSats,c(hsvBounds$minS, hsvBounds$maxS))
   hsvBounds$incV <- ch.getHSVincrement(numLevelVals,c(hsvBounds$minV, hsvBounds$maxV))
 
   tmpDF <- list()
   for(j in 1:numColors) {
-    tmpDF$h[j] <- hsvBounds$minH + (floor((j-1)/maxIntensityChanges)*hsvBounds$incH)%%1.001
-    if(j <= maxIntensityChanges) {
-      tmpDF$s[j] <- 0
-      tmpDF$v[j] <- hsvBounds$minV + ((j-1)%%maxIntensityChanges)*hsvBounds$incV
-    } else {
-      tmpDF$s[j] <- hsvBounds$maxS - floor((j-1)/(maxIntensityChanges*maxHueChanges))*hsvBounds$incS
-      tmpDF$v[j] <- (1-hsvBounds$maxV) + ((j-1)%%maxIntensityChanges)*hsvBounds$incV
-    }
-
+      tmpDF$h[j] <- hsvBounds$minH + (floor((j-1)/maxIntensityChanges)*hsvBounds$incH)%%1.001
+      if(j <= maxIntensityChanges) {
+        tmpDF$s[j] <- hsvBounds$minS
+        tmpDF$v[j] <- hsvBounds$maxV - ((j-1)%%maxIntensityChanges)*hsvBounds$incV
+      } else {
+        tmpDF$s[j] <- hsvBounds$maxS - floor((j-1)/(maxIntensityChanges*maxHueChanges))*hsvBounds$incS
+        tmpDF$v[j] <- hsvBounds$maxV - ((j-1)%%maxIntensityChanges)*hsvBounds$incV
+      }
   }
+
 
   outDF <- data.frame(tmpDF)
 

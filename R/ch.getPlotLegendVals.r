@@ -2,12 +2,14 @@
 #'
 #' This function creates unique color and line type values for groups to be plotted.
 #' @param df.grpIndex a dataframe containing a column for each grouping variable with the values containing the combination of those variables that are to be plotted. The last column should be the index number for the model that will be used for plotting.  This dataframe is output by the ch.subsetDFbyGroups() function.
+#' @param maxIntensityChanges the maximum number of distinguishable intensity changes. DEFAULT = 8.
+#' @param maxHueChanges the maximum number of distinguishable hue changes. DEFAULT = 10.
 #' @keywords plot group grouping variables legend lty colors
 #' @return this returns a dataframe containing the folloing columns: indexNum (the index number of the dataframe from ch.subsetDFbyGroups()); lty (the line type values for the graph); the group column names; h (the hue for hsv() color of line); s (the saturation for hsv() color of line);v (the intensity for hsv() color of line)
 #' @export
 #' @examples ch.getPlotLegendVals(df.Index)
 
-ch.getPlotLegendVals <- function (df.grpIndex) {
+ch.getPlotLegendVals <- function (df.grpIndex, maxIntensityChanges = 8, maxHueChanges = 10) {
 
     grpCols <- names(df.grpIndex)
     #remove the index number column
@@ -32,7 +34,7 @@ ch.getPlotLegendVals <- function (df.grpIndex) {
 
     #create the legend
     lineTypes <- ch.get67diffLtys()
-    hsvCols <- ch.getHSVcolors(df.grpInfo$nLevels[1])
+    hsvCols <- ch.getHSVcolors(df.grpInfo$nLevels[1], maxIntensityChanges = maxIntensityChanges, maxHueChanges = maxHueChanges)
 
     df.levelLgnd <- list()
     for(i in 1:nGrps) {

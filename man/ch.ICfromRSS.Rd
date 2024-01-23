@@ -13,7 +13,7 @@ ch.ICfromRSS(rss, n, numParameters, ICtype = "BIC")
 
 \item{numParameters}{The number of free parameters.}
 
-\item{ICtype}{A string specifying whether to return the AIC or BIC.  Valid inputs are: "AIC" and "BIC".  DEFAULT = "BIC"
+\item{ICtype}{A string specifying whether to return the AIC or BIC.  Valid inputs are: "AIC" & "BIC".  DEFAULT = "BIC"
 '}
 }
 \value{
