@@ -15,8 +15,9 @@
 ch.RSS <- function(y, fitY, standardize = FALSE) {
 
 		if (standardize) {
-			y <- scale(y)
-			fitY <- scale(fitY)
+			df.z <- standardizeDataAndFit(y, fitY)
+			y <- df.z$data
+			fitY <- df.z$fit
 		}
 
 		#make sure there are predicted values
