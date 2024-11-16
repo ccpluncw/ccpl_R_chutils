@@ -27,7 +27,7 @@ ch.addLegend <- function (df.legend, grpCols, placement="topright", horiz = T, l
     if(includeTitle) {
       lgndTitle <- paste(grpCols, collapse="-")
     }
-    legend(placement, legend=df.legend$nm, title= lgndTitle,col=hsv(df.legend$h,df.legend$s,df.legend$v), lty=as.character(df.legend$lty), lwd=lwd, cex=cexLegend, bty=bty, inset=inset, ...)
+    legend(placement, legend=df.legend$nm, title= lgndTitle,col=hsv(df.legend$h,df.legend$s,df.legend$v), lty=as.character(df.legend$lty), pch=df.legend$pch,lwd=lwd, cex=cexLegend, bty=bty, inset=inset, ...)
 
     par(op)
 }
