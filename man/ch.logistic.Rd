@@ -9,7 +9,8 @@ ch.logistic(
   y,
   parameters = c(bottom = NA, top = NA, slope = 5),
   fixedMaxX = NULL,
-  fixedMinX = 0
+  fixedMinX = 0,
+  ...
 )
 }
 \arguments{

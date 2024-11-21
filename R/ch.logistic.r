@@ -12,7 +12,7 @@
 #' @examples ch.logistic (x, y, c(bottom = 0, slope = 5), fixedMinX = -1)
 
 
-ch.logistic <- function(x, y, parameters = c(bottom = NA, top = NA, slope = 5), fixedMaxX = NULL, fixedMinX = 0) {
+ch.logistic <- function(x, y, parameters = c(bottom = NA, top = NA, slope = 5), fixedMaxX = NULL, fixedMinX = 0, ...) {
   data <- data.frame(x = x, y = y)
   df.tmp <- data
 
@@ -65,7 +65,7 @@ ch.logistic <- function(x, y, parameters = c(bottom = NA, top = NA, slope = 5), 
   }
 
 
-  dat.nls <- nls(fml, data = df.tmp, start=start)
+  dat.nls <- nls(fml, data = df.tmp, start=start, ...)
   data$Fit <- fitted(dat.nls)
   if(!is.null(fixedMaxX)) {
     data$scale = 10/maxX
