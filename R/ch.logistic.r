@@ -27,51 +27,40 @@ ch.logistic <- function(x, y, parameters = c(bottom = NA, top = NA, slope = 5), 
     df.tmp$scale = 10/maxX
   }
 
-  if(fixedMinX != 0) {
-    #transform x so it starts at 0
-    df.tmp$x <- df.tmp$x - fixedMinX
-  }
+  #used to transform x so it starts at 0
+  df.tmp$shift <- ifelse(fixedMinX != 0, -1*fixedMinX, 0)
 
+  #fill the b start point
+  start["slope"] <- ifelse(!is.na(parameters["slope"]), parameters["slope"], 5)
 
   ### if both a and d parameters have a start value do the following
   if(!is.na(parameters["bottom"]) & !is.na(parameters["top"])) {
     start["bottom"] <- parameters["bottom"]
     start["top"] <- parameters["top"]
-    fml <- as.formula(y ~ bottom + (top-bottom)/(1+exp(slope-scale*x)))
+    fml <- as.formula(y ~ bottom + (top-bottom)/(1+exp(slope-scale*(x+shift))))
   } else {
     #check if a or d exists, but not both
     if(!is.na(parameters["bottom"]) | !is.na(parameters["top"])) {
       #check if an a parameter exists
       if(!is.na(parameters["bottom"])) {
         start["bottom"] <- parameters["bottom"]
-        fml <- as.formula(y ~ bottom + (1-bottom)/(1+exp(slope-scale*x)))
+        fml <- as.formula(y ~ bottom + (1-bottom)/(1+exp(slope-scale*(x+shift))))
       }
       #check if a d parameter exists
       if(!is.na(parameters["top"])) {
         start["top"] <- parameters["top"]
-        fml <- as.formula(y ~ top/(1+exp(slope-scale*x)))
+        fml <- as.formula(y ~ top/(1+exp(slope-scale*(x+shift))))
       }
     } else {
       #now we know that neither a nor d exists
-      fml <- as.formula(y ~ 1/(1+exp(slope-scale*x)))
+      fml <- as.formula(y ~ 1/(1+exp(slope-scale*(x+shift))))
     }
   }
 
-  #fill the b start point
-  if(!is.na(parameters["slope"])) {
-    start["slope"] <- parameters["slope"]
-  } else {
-    start["slope"] <- 5
-  }
-
-
   dat.nls <- nls(fml, data = df.tmp, start=start, ...)
-  data$Fit <- fitted(dat.nls)
-  if(!is.null(fixedMaxX)) {
-    data$scale = 10/maxX
-  }
+  df.tmp$Fit <- fitted(dat.nls)
+  data <- df.tmp
 
-  #dat.r2.1 <- 1 - dat.nls$m$deviance()/sum((df.tmp$y - mean(df.tmp$y)^2))
   dat.r2.1 <-ch.R2(data$y,data$Fit)
   outList <- list(data = data, fit = dat.nls, r2 = dat.r2.1)
 

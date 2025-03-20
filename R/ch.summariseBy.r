@@ -14,7 +14,7 @@
 
 ch.summariseBy <- function(data, grpCol, dvCol, newCol, FUN) {
 
-  res <- as.data.frame(data %>% dplyr::group_by_(grpCol) %>% dplyr::summarise( out = FUN(eval(parse(text=dvCol)))))
+  res <- as.data.frame(data %>% dplyr::group_by(across(all_of(grpCol))) %>% dplyr::summarise( out = FUN(eval(parse(text=dvCol)))))
   colnames(res)[which(names(res) == "out")] <- newCol
   return(res)
 }

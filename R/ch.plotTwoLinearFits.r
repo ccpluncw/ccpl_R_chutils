@@ -25,7 +25,7 @@
 
 ch.plotTwoLinearFits <- function (data, xCol, y1Col, y2Col, minN = NULL, y1Label = NA, y2Label = NA, parOp = NULL, cex1 = 1.25, cex.topTile =1.25, printR2 = T, topTitle = NULL, ylimMin1 = 0, ylimMax1 = 0, ylimMin2 = 0, ylimMax2 = 0, filename = NULL, ...) {
 
-    df.tmp <- as.data.frame(data %>% dplyr::group_by_(xCol) %>% dplyr::summarise(aveY1 = mean(eval(parse(text = y1Col))),
+    df.tmp <- as.data.frame(data %>% dplyr::group_by(across(all_of(xCol))) %>% dplyr::summarise(aveY1 = mean(eval(parse(text = y1Col))),
         aveY2 = mean(eval(parse(text = y2Col))),
         N = length(eval(parse(text = y2Col)))
     ) )
