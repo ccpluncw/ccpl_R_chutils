@@ -25,8 +25,8 @@ ch.getChlogisticXfromProbability <- function(modelList, value = 0.5, range.x = N
 		scale <- modelList$data$scale[1]
 
 		out <- tryCatch({
-									 uniroot(findInt(logList, shift, scale, value = value), range.x)$root
-								}, error = function(logList) {
+									 uniroot(findInt(modelList, shift, scale, value = value), range.x)$root
+								}, error = function(modelList) {
 								            message("ch.getChlogisticXfromProbability failed")
 								            # Choose a return value in case of error
 								            NA
