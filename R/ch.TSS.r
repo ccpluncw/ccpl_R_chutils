@@ -13,7 +13,7 @@
 ch.TSS <- function(y, standardize = FALSE) {
 
 	if (standardize) {
-		y <- scale(y)
+		y <- scale(y)[,1]
 	}
 	meanY <- mean(y, na.rm=T)
 	tss <- sum( (y - meanY)^2, na.rm = T)

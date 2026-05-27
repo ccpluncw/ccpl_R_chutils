@@ -15,7 +15,7 @@
 ch.RSS <- function(y, fitY, standardize = FALSE) {
 
 		if (standardize) {
-			df.z <- standardizeDataAndFit(y, fitY)
+			df.z <- ch.standardizeDataAndFit(y, fitY)
 			y <- df.z$data
 			fitY <- df.z$fit
 		}
