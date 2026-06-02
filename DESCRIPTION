@@ -1,8 +1,12 @@
 Package: chutils
 Title: What the Package Does (one line, title case)
-Version: 0.0.0.9000
+Version: 0.0.0.9001
 Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
 Description: What the package does (one paragraph).
+Note: Development of this package was assisted by Claude (Anthropic), an AI
+    coding assistant, for code refactoring, documentation, testing, and
+    debugging. All scientific decisions, model specifications, and algorithm
+    design were made by the package authors.
 Depends: R (>= 3.5.0)
 License: What license is it under?
 Encoding: UTF-8
@@ -12,4 +16,8 @@ Imports:
     dplyr,
     reshape2,
     stringdist,
-    RPushbullet
+    RPushbullet,
+    stats
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
