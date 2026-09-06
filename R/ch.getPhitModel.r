@@ -5,9 +5,11 @@
 #' @return expression with of the best fitting model (with parameters and predictor variables)
 #' @keywords nls object p(Hit) model eval expression
 #' @export
-#' @examples ch.getPhitModel (nlsObject)
-#' @examples model <- ch.getPhitModel (nlsObject)
-#' @examples with(data, eval(model)
+#' @examples
+#' \dontrun{
+#' model <- ch.getPhitModel(nlsObject)
+#' with(data, eval(model))
+#' }
 
 ch.getPhitModel <- function (pHitFit, yLab = "p(Hit)", xLab = expression(paste("", Psi,"(value) Distributional overlap", sep=""))) {
 

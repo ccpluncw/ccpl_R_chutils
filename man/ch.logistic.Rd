@@ -33,5 +33,12 @@ This function fits a logistic function to a dataset
 \examples{
 ch.logistic (x, y, c(bottom = 0, slope = 5), fixedMinX = -1)
 }
+\seealso{
+\code{\link{ch.logisticXfromY}} to find the x at a given y.
+  For binary, trial-level data prefer fit_choice() in the chBinomFit
+  package: this function fits aggregate proportions by least squares,
+  which estimates the same curve less efficiently and is sensitive to
+  how the proportions were binned.
+}
 \keyword{function}
 \keyword{logistic}

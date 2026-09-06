@@ -5,9 +5,11 @@
 #' @return expression with of the best fitting model (with parameters and predictor variables)
 #' @keywords lm object model eval expression
 #' @export
-#' @examples ch.getLmModel (lmObject)
-#' @examples model <- ch.getLmModel (lmObject)
-#' @examples with(data, eval(model)
+#' @examples
+#' \dontrun{
+#' model <- ch.getLmModel(lmObject)
+#' with(data, eval(model))
+#' }
 
 ch.getLmModel <- function (linearFit, yLab = NULL, xLab = expression(paste("", Psi,"(value) Distributional overlap", sep=""))) {
 

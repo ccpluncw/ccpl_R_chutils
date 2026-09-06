@@ -20,9 +20,10 @@ expression with of the best fitting model (with parameters and predictor variabl
 This function returns an LM model that can be evaluated (i.e, an expression) from an lm object
 }
 \examples{
-ch.getLmModel (lmObject)
-model <- ch.getLmModel (lmObject)
-with(data, eval(model)
+\dontrun{
+model <- ch.getLmModel(lmObject)
+with(data, eval(model))
+}
 }
 \keyword{eval}
 \keyword{expression}

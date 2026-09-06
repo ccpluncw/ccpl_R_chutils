@@ -20,9 +20,10 @@ expression with of the best fitting model (with parameters and predictor variabl
 This function returns a p(Hit) model that can be evaluated (i.e, an expression) from an nls object
 }
 \examples{
-ch.getPhitModel (nlsObject)
-model <- ch.getPhitModel (nlsObject)
-with(data, eval(model)
+\dontrun{
+model <- ch.getPhitModel(nlsObject)
+with(data, eval(model))
+}
 }
 \keyword{eval}
 \keyword{expression}

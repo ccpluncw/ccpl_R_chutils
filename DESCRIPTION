@@ -1,14 +1,20 @@
 Package: chutils
-Title: What the Package Does (one line, title case)
+Title: Utility Functions for Experimental Psychology Analyses
 Version: 0.0.0.9001
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person(given = "Dale", family = "Cohen", email = "dalejcohen@gmail.com",
+    role = c("aut", "cre"))
+Description: Helpers used across the author's analysis packages and scripts:
+    data wrangling and subject filtering, model fit statistics, signal
+    detection measures, curve fitting for choice and response time data,
+    plotting helpers, and assorted small utilities. Functions carry a 'ch.'
+    prefix. The scope is deliberately broad; functions with a domain of
+    their own belong in a package of their own.
 Note: Development of this package was assisted by Claude (Anthropic), an AI
     coding assistant, for code refactoring, documentation, testing, and
     debugging. All scientific decisions, model specifications, and algorithm
     design were made by the package authors.
 Depends: R (>= 3.5.0)
-License: What license is it under?
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.3

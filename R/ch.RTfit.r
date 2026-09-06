@@ -1,13 +1,28 @@
-#' Fits the p(HVO) function for the choice experiment
+#' Fits a linear model of a response variable on an x variable
 #'
-#' This function fits p(HVO) as a non-linear exponential decay function of an x variable (often overlap). It forces the first point to equal 1 and the last point is .5 on the y-axis. It outputs the fit of the function and the r_square.
+#' This function fits y as a linear function of x using \code{\link{lm}}, and
+#' returns the fitted object alongside its slope, intercept and r_square. It was
+#' written for response times, but nothing in it is specific to RT. When a
+#' two-level grouping variable is supplied the group is coded 1/-1 and entered
+#' as an additive term, so the two groups are fit as parallel lines: a common
+#' slope with the intercept shifted by +delta and -delta.
 #' @param x the x variable for the x-axis (often overlap).
-#' @param y the y variable for the y-axis (often p(hit)).
-#' @param grp the grouping variable that identifies those stimuli whose value are above the reference distribution and those that are below the reference distribution. When this variable is included, then the intercept parameter is allowed to vary for refHVO and refLVO, but the slope is kept constant. DEFAULT = NULL (the grouping variable is ignored)
-#' @return a list of the fit, r2 from the nls .
-#' @keywords fit p(hit) p(HVO)
+#' @param y the y variable for the y-axis (often RT).
+#' @param grp a grouping variable with exactly two levels. When it is included,
+#'   the intercept is allowed to differ between the two groups but the slope is
+#'   kept constant. A grouping variable with any other number of levels is
+#'   ignored with a warning. DEFAULT = NULL (the grouping variable is ignored)
+#' @return a list with RTObject (the lm fit, or NULL if it did not fit), beta
+#'   (the slope on x), alpha (the intercept), delta (half the difference between
+#'   the group intercepts, 0 when no grouping variable was used) and r2. When
+#'   the fit fails, r2 is 0 and the coefficients are NA.
+#' @keywords fit linear model RT
+#' @seealso \code{\link{ch.R2}}, \code{\link{ch.plotTwoLinearFits}}
 #' @export
-#' @examples ch.RTfit (x,y, grp)
+#' @examples
+#' x <- rep(1:10, 5)
+#' y <- 2 * x + rnorm(length(x))
+#' ch.RTfit(x, y)
 
 ch.RTfit <- function (x, y, grp = NULL) {
 

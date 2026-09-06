@@ -8,6 +8,11 @@
 #' @param fixedMinX A numeric value that specifies the fixed x value for the function to reach floor.  This value must be set and is used to transform the x variable so that the logistic will run properly.  If you are unsure, then set this value to min(x).  DEFAULT = 0.
 #' @keywords logistic function
 #' @return a list that contains the input data (data) with the best fit values (column name = "fit") and a scale value if scale is fixed (column name = "scale"); the nls object (fit); and a measure of the variance explained by the fitted function (r2).
+#' @seealso \code{\link{ch.logisticXfromY}} to find the x at a given y.
+#'   For binary, trial-level data prefer fit_choice() in the chBinomFit
+#'   package: this function fits aggregate proportions by least squares,
+#'   which estimates the same curve less efficiently and is sensitive to
+#'   how the proportions were binned.
 #' @export
 #' @examples ch.logistic (x, y, c(bottom = 0, slope = 5), fixedMinX = -1)
 
